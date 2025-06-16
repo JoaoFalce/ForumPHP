@@ -10,13 +10,7 @@ class PostController {
             session_start();
         }
 
-            /*
-        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
-            $_SESSION['post_error'] = "Você precisa estar logado para criar posts.";
-            header("Location: /TrabalhoPHP/login");
-            exit();
-        }
-            */
+           
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verificação do token CSRF
@@ -66,13 +60,7 @@ class PostController {
             session_start();
         }
 
-            /*
-        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
-            $_SESSION['post_error'] = "Você precisa estar logado para editar posts.";
-            header("Location: /TrabalhoPHP/login");
-            exit();
-        }
-            */
+            
 
         // Verificação do token CSRF
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -121,13 +109,7 @@ class PostController {
             session_start();
         }
 
-            /*
-        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
-            $_SESSION['post_error'] = "Você precisa estar logado para excluir posts.";
-            header("Location: /TrabalhoPHP/login");
-            exit();
-        }   
-            */
+            
 
         $userId = $_SESSION['user_id'];
 
