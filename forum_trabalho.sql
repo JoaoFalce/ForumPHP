@@ -194,7 +194,7 @@ ALTER TABLE `comments`
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
---
+
 -- Limitadores para a tabela `post_categories`
 --
 ALTER TABLE `post_categories`
