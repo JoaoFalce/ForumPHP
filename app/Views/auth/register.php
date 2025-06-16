@@ -31,43 +31,5 @@
         <button type="button" onclick="window.location.href='/TrabalhoPHP/login'" class="back-btn">Voltar ao Login</button>
     </div>
 </div>
-
-
- 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cpfInput = document.querySelector('input[name="cpf"]');
-    const form = document.querySelector('form');
-    
-    if (cpfInput) {
-        cpfInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 11) {
-                value = value.substring(0, 11);
-            }
-            e.target.value = value;
-        });
-    }
-    
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const cpf = cpfInput.value.replace(/\D/g, '');
-            const password = document.querySelector('input[name="password"]').value;
-            
-            if (cpf.length !== 11) {
-                alert('CPF deve ter exatamente 11 dígitos');
-                e.preventDefault();
-                return;
-            }
-            
-            if (password.length < 6) {
-                alert('Senha deve ter pelo menos 6 caracteres');
-                e.preventDefault();
-                return;
-            }
-        });
-    }
-});
-</script>
 </body>
 </html>
