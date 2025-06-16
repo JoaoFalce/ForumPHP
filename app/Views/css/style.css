@@ -1,0 +1,554 @@
+/*==========================================================
+  Global & Reset Styles
+  ==========================================================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores */
+    --primary-blue: #0079d3;
+    --dark-blue: #005999;
+    --light-blue: #e0f7fa; /* Um azul mais claro para um toque mais suave */
+    --background-light: #f0f2f5; /* Fundo levemente mais claro */
+    --card-background: #ffffff;
+    --text-dark: #2f343a; /* Azul escuro quase preto */
+    --text-medium: #808080; /* Cinza médio para textos secundários */
+    --post-bg: #e0f7fa;
+    --post-text: #004d40;
+    --comment-bg: #f7f7f7;
+    --error-bg: #ffe6e6;
+    --error-text: #b30000;
+    --success-bg: #e6ffed;
+    --success-text: #006600;
+
+    /* Sombras */
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombra mais sutil */
+    --shadow-medium: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    --shadow-blue: 0 1px 4px rgba(0, 121, 211, 0.2); /* Sombra azul mais suave */
+    --shadow-green: 0 1px 5px rgba(0, 77, 64, 0.2); /* Sombra verde mais suave */
+
+    /* Bordas */
+    --border-radius-small: 3px;
+    --border-radius-medium: 5px;
+    --border-radius-large: 7px;
+
+    /* Transições */
+    --transition-fast: 0.12s ease-in-out;
+    --transition-medium: 0.2s ease;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif; /* Certifique-se de que esta fonte está linkada no HTML */
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px 8px; /* Padding geral menor */
+    color: var(--text-dark);
+    line-height: 1.4;
+    font-size: 15px; /* Define um tamanho de fonte base menor para o body */
+}
+
+/*==========================================================
+  Layout & Containers
+  ==========================================================*/
+
+/* Container principal para o fórum, login/registro, etc. */
+.main-container {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    width: 100%;
+    max-width: 500px; /* Largura máxima para ser mais compacto */
+    margin: 0 auto; /* Centraliza */
+    overflow: hidden; /* Garante que o border-radius seja aplicado a tudo */
+}
+
+/* Header */
+header {
+    background-color: var(--card-background);
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    box-shadow: var(--shadow-medium);
+    margin-bottom: 12px;
+    width: 100%;
+    max-width: 500px; /* Alinha com o container principal */
+}
+
+/* Estilo para headers que usam display flex (como em post_detalhes.php) */
+header[style*="display: flex"] { /* Seleciona apenas headers com display:flex inline */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px; /* Ajuste para o header de post_detalhes e categoria */
+    border-radius: var(--border-radius-large); /* Arredonda todos os cantos */
+    margin-bottom: 15px;
+    /* Remover `max-width: 500px` aqui se este header específico não for o main-container */
+    /* Se o header de detalhes for uma div separada do main-container, ajuste `max-width` */
+}
+
+
+/* Main Content Area (dentro do .main-container) */
+main {
+    padding: 20px 18px; /* Padding interno do conteúdo principal */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    max-width: 500px; /* Alinha com o container principal */
+    padding: 10px 20px;
+    text-align: center;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-large); /* Arredonda todos os cantos */
+    box-shadow: var(--shadow-medium);
+    font-size: 0.8em;
+    color: var(--text-medium);
+    margin-top: 20px;
+}
+
+/*==========================================================
+  Typography
+  ==========================================================*/
+h1 {
+    font-size: 1.8em;
+    color: var(--primary-blue);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+h2 { /* Usado para "Comentários", "Categorias Disponíveis", etc. */
+    margin-bottom: 18px;
+    font-size: 1.6em;
+    color: var(--text-dark);
+    text-align: center;
+    border-bottom: 1px solid var(--light-blue);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+h3 { /* Títulos de posts */
+    font-size: 1.2em;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+}
+
+p { /* Parágrafos gerais */
+    font-size: 0.9em;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+small { /* Datas, usernames menores */
+    font-size: 0.7em;
+    color: var(--text-medium);
+    display: block; /* Garante que o small fique em sua própria linha se necessário */
+}
+
+strong {
+    color: var(--primary-blue);
+}
+
+a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color var(--transition-medium);
+}
+
+a:hover {
+    color: var(--dark-blue);
+}
+
+/* Links dentro do header (Olá, usuário | Sair) */
+header p a {
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* Links no footer */
+footer p {
+    margin: 0;
+}
+
+/*==========================================================
+  Forms
+  ==========================================================*/
+form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.85em;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-medium);
+    font-size: 0.9em;
+    box-sizing: border-box;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 1.5px rgba(0, 121, 211, 0.1);
+    outline: none;
+}
+
+/*==========================================================
+  Buttons & Actions
+  ==========================================================*/
+
+/* Botões primários (submit de form, Criar Post) */
+form button[type="submit"],
+.btn-criar-post {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: var(--border-radius-medium);
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-medium), transform var(--transition-fast), box-shadow var(--transition-fast);
+    display: inline-block; /* Para o link .btn-criar-post */
+    text-decoration: none;
+    text-align: center;
+    box-shadow: var(--shadow-blue);
+}
+
+form button[type="submit"]:hover,
+.btn-criar-post:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(0); /* Sem elevação para um look mais plano */
+    box-shadow: 0 2px 6px rgba(0, 121, 211, 0.3);
+}
+
+/* Grupo de botões (Login/Registro/Recuperar) */
+.button-group {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 9px;
+    font-size: 0.85em;
+    border-radius: var(--border-radius-medium);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    font-weight: 600;
+}
+
+.recover-btn {
+    background-color: var(--comment-bg);
+    color: var(--text-dark);
+    box-shadow: var(--shadow-light);
+}
+
+.recover-btn:hover {
+    background-color: #e8e8e8;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.register-btn, .back-btn {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-blue);
+}
+
+.register-btn:hover, .back-btn:hover {
+    background-color: var(--dark-blue);
+    color: white;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 121, 211, 0.3);
+}
+
+/* Botões de ação (Editar, Excluir) */
+.btn-action {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-small);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-blue);
+    font-size: 0.75em;
+    transition: background-color var(--transition-medium), color var(--transition-medium);
+    display: inline-block;
+    min-width: 55px;
+    text-align: center;
+}
+
+.btn-action:hover {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+.btn-action.no-bg {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    min-width: auto;
+    color: var(--primary-blue);
+}
+
+.btn-action.no-bg:hover {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+}
+
+/*==========================================================
+  Specific Components
+  ==========================================================*/
+
+/* Mensagens (Error/Success) */
+.error, .success {
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: var(--border-radius-medium);
+    font-size: 0.85em;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid; /* Adiciona uma borda geral */
+}
+
+.error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border-color: var(--error-text); /* Cor da borda específica */
+}
+
+.success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border-color: var(--success-text); /* Cor da borda específica */
+}
+
+/* Lists (Categories, Posts in forum view) */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li a { /* Links de categoria/post na lista */
+    display: block;
+    background-color: var(--light-blue);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-medium);
+    color: var(--primary-blue);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-blue);
+    transition: background-color var(--transition-medium), color var(--transition-medium), transform var(--transition-fast);
+    font-size: 0.95em;
+}
+
+li a:hover {
+    background-color: var(--dark-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Mensagem caso não haja itens na seção (ex: "Nenhum post nessa categoria.") */
+section p {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-medium);
+    padding: 12px;
+    background-color: var(--comment-bg);
+    border-radius: var(--border-radius-medium);
+    margin-top: 12px;
+}
+
+/* Posts (Individual cards) */
+.post-container {
+    background-color: var(--post-bg);
+    border-radius: var(--border-radius-medium);
+    padding: 10px 15px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-green);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+}
+
+.post-container:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 77, 64, 0.3);
+}
+
+.post-container a { /* Link para detalhes do post */
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+    /* Removido `position: relative;` e `top:0; left:0;` se existissem */
+}
+
+.post-actions { /* Contêiner dos botões de Editar/Excluir do post */
+    margin-top: 10px; /* Espaçamento entre o conteúdo do post e os botões */
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 8px; /* Espaçamento entre os botões */
+    width: 100%; /* Garante que ocupe a largura total do container */
+}
+
+/* Comentários */
+.comment {
+    background-color: var(--comment-bg);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-medium);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+.comment-header strong {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+}
+
+.comment-content { /* Conteúdo do comentário */
+    font-size: 0.85em;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex-grow: 1;
+}
+
+.comment-actions { /* Contêiner dos botões de Editar/Excluir do comentário */
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+}
+
+/*==========================================================
+  Responsive Adjustments
+  ==========================================================*/
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 8px 5px; /* Menos padding em telas menores */
+    }
+
+    header, .main-container, footer {
+        padding: 8px; /* Menos padding para mobile */
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    header[style*="display: flex"] {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    header[style*="display: flex"] h1 {
+        font-size: 1.3em;
+        margin-bottom: 6px;
+    }
+
+    header[style*="display: flex"] .btn-criar-post {
+        width: 100%;
+        text-align: center;
+        padding: 7px 10px;
+    }
+
+    main {
+        padding: 12px 8px; /* Menos padding para mobile */
+    }
+
+    section h2 {
+        font-size: 1.4em;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+    }
+
+    form input, form textarea, form select, form button[type="submit"] {
+        padding: 7px; /* Menos padding */
+        font-size: 0.8em;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 5px; /* Menos gap */
+    }
+
+    .button-group button {
+        width: 100%;
+        padding: 7px;
+        font-size: 0.8em;
+    }
+
+    .btn-action {
+        padding: 3px 6px; /* Menos padding para botões de ação em mobile */
+        font-size: 0.65em; /* Menor fonte */
+        min-width: 50px;
+    }
+
+    .post-container {
+        padding: 8px 10px; /* Menos padding */
+        margin-bottom: 10px;
+    }
+
+    .post-container h3 {
+        font-size: 1em;
+    }
+
+    .comment {
+        padding: 8px 10px; /* Menos padding */
+    }
+
+    .comment-form button {
+        float: none;
+        width: 100%;
+        padding: 7px 12px;
+    }
+
+    .post-actions, .comment-actions { /* Ajuste para mobile */
+        justify-content: flex-start;
+        gap: 4px; /* Menor gap */
+        flex-wrap: wrap; /* Permite quebrar a linha se os botões não couberem */
+    }
+}
