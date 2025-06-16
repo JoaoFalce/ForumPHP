@@ -38,7 +38,7 @@ class Category {
             return false;
         }
     }
-
+      /*
     public static function update($id, $name) {
         try {
             $db = Database::connect();
@@ -49,6 +49,7 @@ class Category {
             return false;
         }
     }
+    */
 
          /*
     public static function delete($id) {
