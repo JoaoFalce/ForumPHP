@@ -22,6 +22,7 @@ class Database {
             }
         }
         // Retorna a instância PDO existente ou recém-criada
+        // Retorna a instância PDO
         return self::$pdo;
     }
 }
