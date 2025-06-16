@@ -1,23 +1,13 @@
 <?php
-// app/Views/categoria.php
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Redireciona se o usuário não estiver logado
 if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
     header("Location: /TrabalhoPHP/login");
     exit();
 }
-
-    /*
-if (!isset($categoria) || !is_array($categoria)) {
-    echo "<p style='color:red;'>Erro: Categoria não encontrada.</p>";
-    echo "<p><a href='/TrabalhoPHP/forum'>Voltar ao Fórum</a></p>";
-    exit();
-}
-    */
 ?>
 
 
