@@ -1,5 +1,4 @@
 <?php
-// app/models/Post.php
 
 require_once __DIR__ . '/../../config/Database.php';
 
@@ -25,16 +24,16 @@ class Post {
             $successCategory = $stmtCategory->execute([$postId, $categoryId]);
 
             if (!$successCategory) {
-                $db->rollBack(); // Desfaz se a inserção da categoria falhar
+                $db->rollBack();
                 return false;
             }
 
             $db->commit(); // Confirma ambas as transações
-            return true; // Retorna true para indicar sucesso
+            return true;
         } catch (PDOException $e) {
             error_log("Erro ao criar post: " . $e->getMessage());
             if ($db->inTransaction()) {
-                $db->rollBack(); // Garante que a transação seja desfeita em caso de erro
+                $db->rollBack();
             }
             return false;
         }
