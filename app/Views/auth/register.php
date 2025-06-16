@@ -33,7 +33,7 @@
 </div>
 
 
- <!--O QUE É ESSE SCRIPT? -->
+ 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const cpfInput = document.querySelector('input[name="cpf"]');
