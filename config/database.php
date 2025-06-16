@@ -7,7 +7,7 @@ class Database {
         if (!self::$pdo) {
             try {
                 // Cria uma nova instância PDO se ainda não existir
-                // DSN (Data Source Name): mysql:host=localhost;dbname=forum_trabalho
+                // DSN (Data Source Name): mysql:host=localhost;port=3307;dbname=forum_trabalho
                 // "root" como usuário e senha vazia "" são padrões para ambientes de desenvolvimento local (XAMPP, WAMP)
                 self::$pdo = new PDO("mysql:host=localhost;dbname=forum_trabalho", "root", "");
                 
