@@ -12,13 +12,7 @@ class CommentController {
             session_start();
         }
 
-    /*
-        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
-            $_SESSION['comment_error'] = "Você precisa estar logado para comentar.";
-            header("Location: /TrabalhoPHP/login");
-            exit();
-        }
-            */
+    
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verificação do token CSRF
