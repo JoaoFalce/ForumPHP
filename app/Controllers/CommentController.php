@@ -15,7 +15,7 @@ class CommentController {
     
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Verificação do token CSRF
+            
             if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
                 $_SESSION['comment_error'] = "Erro de segurança: CSRF token inválido.";
                 header("Location: /TrabalhoPHP/forum");
@@ -42,7 +42,7 @@ class CommentController {
                 exit();
             }
         } else {
-            // Se tentar acessar via GET, redireciona.
+            
             header("Location: /TrabalhoPHP/forum");
             exit();
         }
@@ -90,7 +90,7 @@ class CommentController {
             exit();
         }
 
-        // Verificação do token CSRF
+       
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             $_SESSION['comment_error'] = "Erro de segurança: CSRF token inválido.";
             header("Location: /TrabalhoPHP/comentario-editar?id=" . $id);
