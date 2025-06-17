@@ -6,20 +6,17 @@ class Post {
     public static function create($userId, $title, $content, $categoryId) {
         try {
             $db = Database::connect();
-            // Inicia uma transação para garantir que ambas as inserções (posts e post_categories) funcionem ou falhem juntas
             $db->beginTransaction();
 
             $stmt = $db->prepare("INSERT INTO posts (user_id, title, content, created_at) VALUES (?, ?, ?, NOW())");
             $success = $stmt->execute([$userId, $title, $content]);
             
             if (!$success) {
-                $db->rollBack(); // Desfaz se a inserção do post falhar
+                $db->rollBack();
                 return false;
             }
 
             $postId = $db->lastInsertId();
-
-            // Insere na tabela post_categories para associar o post à categoria
             $stmtCategory = $db->prepare("INSERT INTO post_categories (post_id, category_id) VALUES (?, ?)");
             $successCategory = $stmtCategory->execute([$postId, $categoryId]);
 
@@ -28,7 +25,7 @@ class Post {
                 return false;
             }
 
-            $db->commit(); // Confirma ambas as transações
+            $db->commit();
             return true;
         } catch (PDOException $e) {
             error_log("Erro ao criar post: " . $e->getMessage());
@@ -38,8 +35,7 @@ class Post {
             return false;
         }
     }
-
-    // Renomeado de getAll para corresponder ao controlador
+    
     public static function getAllPostsWithUsernamesAndCategories() {
         try {
             $db = Database::connect();
@@ -61,7 +57,6 @@ class Post {
     public static function getById($id) {
         try {
             $db = Database::connect();
-            // Adicionado p.user_id e pc.category_id na seleção e join para post_categories
             $stmt = $db->prepare("
                 SELECT p.id, p.user_id, p.title, p.content, p.created_at, u.username, pc.category_id 
                 FROM posts p 
