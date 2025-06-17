@@ -13,11 +13,9 @@ if (!isset($comment)) {
     exit();
 }
 
-// Captura possíveis mensagens de erro/sucesso
 $comment_error = $_SESSION['comment_error'] ?? null;
 $comment_success = $_SESSION['comment_success'] ?? null;
 
-// Limpa mensagens para não repetir
 unset($_SESSION['comment_error'], $_SESSION['comment_success']);
 ?>
 
