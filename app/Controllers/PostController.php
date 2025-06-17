@@ -13,7 +13,7 @@ class PostController {
            
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Verificação do token CSRF
+            
             if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
                 $_SESSION['post_error'] = "Erro de segurança: CSRF token inválido.";
                 header("Location: /TrabalhoPHP/post-criar");
@@ -62,7 +62,7 @@ class PostController {
 
             
 
-        // Verificação do token CSRF
+        
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             $_SESSION['post_error'] = "Erro de segurança: CSRF token inválido.";
             header("Location: /TrabalhoPHP/post-editar?id=" . $id);
@@ -80,7 +80,7 @@ class PostController {
             exit();
         }
 
-        // verifica se o usuario logado é o autor do post
+       
         if ($existingPost['user_id'] != $userId) {
             $_SESSION['post_error'] = "Você não tem permissão para editar este post.";
             header("Location: /TrabalhoPHP/post?id=" . $id);
@@ -120,7 +120,7 @@ class PostController {
             exit();
         }
 
-        // verifica se o usuario logado é o autor do post
+        
         if ($existingPost['user_id'] != $userId) {
             $_SESSION['post_error'] = "Você não tem permissão para excluir este post.";
             header("Location: /TrabalhoPHP/post?id=" . $id);
