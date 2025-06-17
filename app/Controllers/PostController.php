@@ -1,5 +1,6 @@
 <?php
 
+
 require_once __DIR__ . '/../Models/Post.php';
 require_once __DIR__ . '/../Models/Category.php';
 
@@ -10,10 +11,13 @@ class PostController {
             session_start();
         }
 
-           
+        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
+            $_SESSION['post_error'] = "Você precisa estar logado para criar posts.";
+            header("Location: /TrabalhoPHP/login");
+            exit();
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
             if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
                 $_SESSION['post_error'] = "Erro de segurança: CSRF token inválido.";
                 header("Location: /TrabalhoPHP/post-criar");
@@ -60,9 +64,12 @@ class PostController {
             session_start();
         }
 
-            
+        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
+            $_SESSION['post_error'] = "Você precisa estar logado para editar posts.";
+            header("Location: /TrabalhoPHP/login");
+            exit();
+        }
 
-        
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             $_SESSION['post_error'] = "Erro de segurança: CSRF token inválido.";
             header("Location: /TrabalhoPHP/post-editar?id=" . $id);
@@ -71,16 +78,15 @@ class PostController {
 
         $title = $_POST['title'] ?? '';
         $content = $_POST['content'] ?? '';
-        $userId = $_SESSION['user_id'];
+        $userId = $_SESSION['user_id']; 
 
         $existingPost = Post::getById($id);
         if (!$existingPost) {
             $_SESSION['post_error'] = "Post não encontrado.";
-            header("Location: /TrabalhoPHP/forum");
+            header("Location: /TrabalhoPHP/forum"); 
             exit();
         }
 
-       
         if ($existingPost['user_id'] != $userId) {
             $_SESSION['post_error'] = "Você não tem permissão para editar este post.";
             header("Location: /TrabalhoPHP/post?id=" . $id);
@@ -95,7 +101,7 @@ class PostController {
 
         if (Post::update($id, $title, $content)) {
             $_SESSION['post_success'] = "Post atualizado com sucesso!";
-            header("Location: /TrabalhoPHP/post?id=" . $id);
+            header("Location: /TrabalhoPHP/post?id=" . $id); 
             exit();
         } else {
             $_SESSION['post_error'] = "Erro ao atualizar o post.";
@@ -109,10 +115,15 @@ class PostController {
             session_start();
         }
 
-            
+        if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
+            $_SESSION['post_error'] = "Você precisa estar logado para excluir posts.";
+            header("Location: /TrabalhoPHP/login");
+            exit();
+        }
 
-        $userId = $_SESSION['user_id'];
+        $userId = $_SESSION['user_id']; 
 
+        
         $existingPost = Post::getById($id);
         if (!$existingPost) {
             $_SESSION['post_error'] = "Post não encontrado.";
@@ -120,10 +131,9 @@ class PostController {
             exit();
         }
 
-        
         if ($existingPost['user_id'] != $userId) {
             $_SESSION['post_error'] = "Você não tem permissão para excluir este post.";
-            header("Location: /TrabalhoPHP/post?id=" . $id);
+            header("Location: /TrabalhoPHP/post?id=" . $id); 
             exit();
         }
 
@@ -132,7 +142,7 @@ class PostController {
         } else {
             $_SESSION['post_error'] = "Erro ao excluir o post.";
         }
-        header("Location: /TrabalhoPHP/forum");
+        header("Location: /TrabalhoPHP/forum"); 
         exit();
     }
 }
