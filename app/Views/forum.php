@@ -39,7 +39,6 @@ if (!isset($_SESSION['user_logged']) || $_SESSION['user_logged'] !== true) {
         </section>
 
         <?php
-        //exibir posts da categoria, se tiver o id na url
         if (isset($_GET['id'])) {
             require_once __DIR__ . '/../Models/Post.php';
             require_once __DIR__ . '/../Models/Category.php';
