@@ -7,11 +7,9 @@ if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Captura a URI
 $requestUri = $_SERVER['REQUEST_URI'];
 $path = parse_url($requestUri, PHP_URL_PATH);
 
-// Remove o caminho base
 $basePath = '/TrabalhoPHP';
 if (strpos($path, $basePath) === 0) {
     $path = substr($path, strlen($basePath));
