@@ -53,7 +53,7 @@ switch ($path) {
         break;
 
     case 'forum':
-        // Pega categorias para enviar para a view
+       
         $categorias = CategoriaController::index();
         $posts = PostController::list();
 
@@ -64,7 +64,7 @@ switch ($path) {
         AuthController::logout();
         break;
 
-    // ROTAS DE CATEGORIA
+  
     case 'categorias':
         $categorias = CategoriaController::index();
         require __DIR__ . '/app/Views/categorias.php';
@@ -76,7 +76,7 @@ switch ($path) {
         if ($id) {
             $categoria = CategoriaController::get($id);
 
-            // Busca posts da categoria (precisa implementar esse método no PostController)
+            
             $posts = PostController::getByCategory($id);
             require __DIR__ . '/app/Views/categoria.php';
         } else {
@@ -85,7 +85,7 @@ switch ($path) {
         }
         break;
 
-    // ROTAS DE POSTS
+    
 
     case 'post-criar':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -116,7 +116,7 @@ switch ($path) {
         exit();
         break;
 
-    // ROTA: DETALHES DE UM POST COM COMENTÁRIOS
+   
     case 'post':
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
         if ($id) {
@@ -129,7 +129,7 @@ switch ($path) {
         }
         break;
 
-    // ROTAS DE COMENTÁRIO - ADICIONADAS COMPLETAS
+ 
     case 'comentario':
         $post_id = isset($_GET['post_id']) ? (int) $_GET['post_id'] : null;
         $comentarios = CommentController::listByPost($post_id);
